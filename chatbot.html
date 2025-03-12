@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate AI - Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <i data-lucide="home" class="logo-icon"></i>
+            <span>Real Estate AI</span>
+        </div>
+        <div class="auth-buttons">
+            <button class="login-btn">Log In</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Features</h2>
+            <button class="close-sidebar" aria-label="Close Sidebar">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <ul class="feature-list">
+            <li class="feature-item">
+                <a href="quality.html" class="feature-link">
+                    <i data-lucide="building-2" class="feature-icon"></i>
+                    Building Quality Assessment
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="fraud.html" class="feature-link">
+                    <i data-lucide="shield-alert" class="feature-icon"></i>
+                    Fraud Detection
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="price.html" class="feature-link">
+                    <i data-lucide="calculator" class="feature-icon"></i>
+                    Price Prediction
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="location.html" class="feature-link">
+                    <i data-lucide="map-pin" class="feature-icon"></i>
+                    Location Analysis
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="vr.html" class="feature-link">
+                    <i data-lucide="view" class="feature-icon"></i>
+                    VR Real Estate
+                </a>
+            </li>
+            <li class="feature-item active">
+                <a href="chatbot.html" class="feature-link">
+                    <i data-lucide="message-circle" class="feature-icon"></i>
+                    AI Assistant
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="chatbot-page-container">
+            <h1 class="chatbot-page-title">Chat with Real Estate AI Assistant</h1>
+            <p class="chatbot-page-subtitle">Ask me anything about properties, market trends, or real estate advice</p>
+            
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-box">
+                    <div class="bot-message">
+                        Hello! I'm your real estate AI assistant. How can I help you with your property search or real estate questions today?
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <input type="text" id="user-input" placeholder="Type your question here..." />
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i data-lucide="send"></i>
+                    </button>
+                    <button class="voice-btn" onclick="startListening()">
+                        <i data-lucide="mic"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Real Estate AI</h3>
+                <p>Empowering real estate decisions with artificial intelligence and data analytics.</p>
+                <div class="contact">
+                    <p><i data-lucide="mail"></i> contact@realestateai.com</p>
+                    <p><i data-lucide="phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section subscribe">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest real estate insights.</p>
+                <form>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Real Estate AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="overlay"></div>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Sidebar toggle functionality
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const closeSidebar = document.querySelector('.close-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('sidebar-open');
+            });
+            
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+            
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+        });
+
+        // Chatbot functionality
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            
+            if (userInput.value.trim() === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.textContent = userInput.value;
+            chatBox.appendChild(userMessage);
+            
+            // Clear input
+            const userQuestion = userInput.value;
+            userInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'bot-message typing-indicator';
+            typingIndicator.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+            chatBox.appendChild(typingIndicator);
+            
+            // Auto scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Simulate bot response (replace with actual API call)
+            setTimeout(() => {
+                // Remove typing indicator
+                chatBox.removeChild(typingIndicator);
+                
+                // Add bot response
+                const botMessage = document.createElement('div');
+                botMessage.className = 'bot-message';
+                
+                // Simple response logic - replace with actual AI integration
+                if (userQuestion.toLowerCase().includes('price')) {
+                    botMessage.textContent = "Property prices vary greatly based on location, size, and condition. I can provide more specific information if you tell me which area you're interested in.";
+                } else if (userQuestion.toLowerCase().includes('location') || userQuestion.toLowerCase().includes('area')) {
+                    botMessage.textContent = "Location is one of the most important factors in real estate. I can analyze neighborhood data, schools, crime rates, and amenities for any location you're interested in.";
+                } else if (userQuestion.toLowerCase().includes('mortgage') || userQuestion.toLowerCase().includes('loan')) {
+                    botMessage.textContent = "Current mortgage rates are competitive. I recommend comparing offers from multiple lenders. Would you like me to explain different types of mortgage options?";
+                } else {
+                    botMessage.textContent = "That's a great question about real estate. I'd be happy to provide more detailed information. Could you give me more specifics about what you're looking for?";
+                }
+                
+                chatBox.appendChild(botMessage);
+                
+                // Auto scroll to bottom again
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1500);
+        }
+        
+        // Voice recognition
+        function startListening() {
+            const voiceBtn = document.querySelector('.voice-btn');
+            const userInput = document.getElementById('user-input');
+            
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                
+                // Change button appearance
+                voiceBtn.innerHTML = '<i data-lucide="mic-off"></i>';
+                lucide.createIcons();
+                voiceBtn.classList.add('listening');
+                
+                recognition.onresult = function(event) {
+                    userInput.value = event.results[0][0].transcript;
+                    
+                    // Reset button
+                    voiceBtn.innerHTML = '<i data-lucide="mic"></i>';
+                    lucide.createIcons();
+                    voiceBtn.classList.remove('listening');
+                };
+                
+                recognition.onend = function() {
+                    // Reset button in case of error or user stopped
+                    voiceBtn.innerHTML = '<i data-lucide="mic"></i>';
+                    lucide.createIcons();
+                    voiceBtn.classList.remove('listening');
+                };
+                
+                recognition.start();
+            } else {
+                alert("Voice recognition is not supported in your browser.");
+            }
+        }
+        
+        // Send message on Enter key
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

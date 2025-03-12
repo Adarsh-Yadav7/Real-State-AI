@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI VR Real Estate Tour</title>
+    <link rel="stylesheet" href="css/vr.css">
+    <!-- A-Frame Library for VR -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- Fix Favicon Issue -->
+    <link rel="icon" href="data:," />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External JavaScript -->
+    <script defer src="js/vr.js"></script>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <span class="loader"></span>
+        <p class="loading-text">Loading VR Experience...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="vr-header">
+        <a href="#" class="vr-logo">
+            <i class="fa-solid fa-vr-cardboard icon"></i>
+            VR RealEstate Tour
+        </a>
+    </header>
+
+    <div class="main-container">
+        <!-- House Selection Menu -->
+        <div class="menu" id="houseMenu">
+            <h2>Explore Virtual Properties</h2>
+            <p>Select a property to begin your immersive 360° tour</p>
+            
+            <div class="house-grid">
+                <div class="house-card" onclick="selectHouse(1)">
+                    <span class="feature-badge badge-premium">Premium</span>
+                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" alt="House 1" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-house icon"></i> Luxury Villa</h3>
+                        <p class="card-text">4 Bedrooms • 3 Bathrooms • 2400 sq.ft</p>
+                        <button class="btn btn-primary">
+                            <i class="fa-solid fa-vr-cardboard"></i> Start VR Tour
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="house-card" onclick="selectHouse(2)">
+                    <span class="feature-badge badge-new">New</span>
+                    <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg" alt="House 2" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-building icon"></i> Modern Apartment</h3>
+                        <p class="card-text">3 Bedrooms • 2 Bathrooms • 1800 sq.ft</p>
+                        <button class="btn btn-primary">
+                            <i class="fa-solid fa-vr-cardboard"></i> Start VR Tour
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Selection Menu -->
+        <div class="menu" id="roomMenu" style="display: none;">
+            <h2>Explore Property Rooms</h2>
+            <p>Select a room to view in immersive 360° VR</p>
+            
+            <div class="room-grid">
+                <div class="room-card" onclick="showRoom('hall')">
+                    <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg" alt="Living Room" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-couch icon"></i> Living Room</h3>
+                        <p class="card-text">Spacious and bright living area</p>
+                        <button class="btn btn-secondary">View in 360°</button>
+                    </div>
+                </div>
+                
+                <div class="room-card" onclick="showRoom('kitchen')">
+                    <img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg" alt="Kitchen" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-kitchen-set icon"></i> Kitchen</h3>
+                        <p class="card-text">Modern fully-equipped kitchen</p>
+                        <button class="btn btn-secondary">View in 360°</button>
+                    </div>
+                </div>
+                
+                <div class="room-card" onclick="showRoom('bathroom')">
+                    <img src="https://images.pexels.com/photos/1910472/pexels-photo-1910472.jpeg" alt="Bathroom" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-bath icon"></i> Bathroom</h3>
+                        <p class="card-text">Elegant bathroom with premium fixtures</p>
+                        <button class="btn btn-secondary">View in 360°</button>
+                    </div>
+                </div>
+                
+                <div class="room-card" onclick="showRoom('balcony')">
+                    <img src="https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg" alt="Balcony" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fa-solid fa-mountain-sun icon"></i> Balcony</h3>
+                        <p class="card-text">Scenic balcony with panoramic views</p>
+                        <button class="btn btn-secondary">View in 360°</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="goBack()" class="btn btn-back" style="margin-top: 2rem;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Properties
+            </button>
+        </div>
+    </div>
+
+    <!-- VR Scene -->
+    <div id="vr-container">
+        <a-scene loading-screen="enabled: false">
+            <!-- 360° Background Image -->
+            <a-sky id="vr-sky"></a-sky>
+            
+            <!-- Camera with controls -->
+            <a-camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
+                <a-cursor color="#F97316"></a-cursor>
+            </a-camera>
+        </a-scene>
+
+        <!-- Room Navigation Dots -->
+        <div class="room-nav-dots" id="roomNavDots">
+            <div class="room-dot" onclick="showRoom('hall')" id="hallDot">
+                <i class="fa-solid fa-couch"></i>
+                <span class="room-dot-tooltip">Living Room</span>
+            </div>
+            <div class="room-dot" onclick="showRoom('kitchen')" id="kitchenDot">
+                <i class="fa-solid fa-kitchen-set"></i>
+                <span class="room-dot-tooltip">Kitchen</span>
+            </div>
+            <div class="room-dot" onclick="showRoom('bathroom')" id="bathroomDot">
+                <i class="fa-solid fa-bath"></i>
+                <span class="room-dot-tooltip">Bathroom</span>
+            </div>
+            <div class="room-dot" onclick="showRoom('balcony')" id="balconyDot">
+                <i class="fa-solid fa-mountain-sun"></i>
+                <span class="room-dot-tooltip">Balcony</span>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div id="contactInfo">
+            <h2 id="houseTitle">Property Details</h2>
+            <div class="property-detail">
+                <div class="property-detail-icon">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                </div>
+                <div class="property-detail-text">
+                    <h4>Area</h4>
+                    <p id="propertyArea">2400 sq.ft</p>
+                </div>
+            </div>
+            <div class="property-detail">
+                <div class="property-detail-icon">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <div class="property-detail-text">
+                    <h4>Price</h4>
+                    <p id="propertyPrice">$850,000</p>
+                </div>
+            </div>
+            <div class="property-detail">
+                <div class="property-detail-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="property-detail-text">
+                    <h4>Location</h4>
+                    <p id="propertyLocation">Silicon Valley, CA</p>
+                </div>
+            </div>
+            <button class="contact-btn">
+                <i class="fa-solid fa-phone"></i> Contact Agent
+            </button>
+        </div>
+
+        <!-- VR Instructions -->
+        <div class="instructions" id="vrInstructions">
+            <button class="close-instructions" id="closeInstructions">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <h3><i class="fa-solid fa-circle-info icon"></i> How to Navigate</h3>
+            <ul>
+                <li><i class="fa-solid fa-mouse icon"></i> Click and drag to look around</li>
+                <li><i class="fa-solid fa-mobile-screen icon"></i> On mobile, move your phone to look around</li>
+                <li><i class="fa-solid fa-circle-dot icon"></i> Use the room dots to change rooms</li>
+            </ul>
+            <p>For the best experience, use a VR headset!</p>
+        </div>
+
+        <!-- VR Controls -->
+        <div class="vr-controls">
+            <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+            <button class="control-btn" id="infoToggleBtn" title="Show/Hide Info">
+                <i class="fa-solid fa-circle-info"></i>
+            </button>
+            <button class="control-btn" onclick="exitVR()" title="Exit VR">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/vr.js"></script>
+</body>
+</html>

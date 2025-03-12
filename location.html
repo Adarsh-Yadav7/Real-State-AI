@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Location Analysis</title>
+    <link rel="stylesheet" href="css/location.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="location-container">
+        <div class="location-card">
+            <div class="card-header">
+                <div class="location-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h1>Smart Investment Location Analysis</h1>
+                <p class="subtitle">Find the perfect location for your next real estate investment</p>
+            </div>
+
+            <div class="search-section">
+                <div class="input-group">
+                    <label for="locationInput">Enter Location</label>
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="locationInput" placeholder="e.g., New York, NY">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="analyzeBtn" onclick="analyzeLocation()" class="analyze-btn">
+                        <i class="fas fa-chart-line"></i> Analyze Location
+                    </button>
+                    <button id="currentLocationBtn" onclick="useCurrentLocation()" class="current-btn">
+                        <i class="fas fa-location-arrow"></i> Use My Location
+                    </button>
+                </div>
+            </div>
+
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <div class="result-section investment-decision">
+                    <h2><i class="fas fa-chart-pie"></i> Investment Analysis</h2>
+                    <div class="decision-box">
+                        <p id="investmentDecision"></p>
+                    </div>
+                </div>
+
+                <div class="result-section nearby-places">
+                    <h2><i class="fas fa-landmark"></i> Important Nearby Places</h2>
+                    <ul id="placesList" class="places-list"></ul>
+                </div>
+
+                <div class="result-section area-goodness">
+                    <h2><i class="fas fa-star"></i> Area Advantages</h2>
+                    <div class="goodness-box">
+                        <p id="areaGoodness"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analyzing location data...</p>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+                <p>Our AI-powered location analyzer examines proximity to essential amenities like hospitals, schools, and shopping centers to determine investment potential. Areas with multiple key facilities typically offer better investment returns.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/location.js"></script>
+    <script>
+        // Additional UI JavaScript
+        document.getElementById('analyzeBtn').addEventListener('click', function() {
+            showLoading();
+        });
+        
+        document.getElementById('currentLocationBtn').addEventListener('click', function() {
+            showLoading();
+        });
+        
+        function showLoading() {
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            document.getElementById('resultsContainer').style.display = 'none';
+        }
+        
+        // Update the existing displayAnalysis function to show results and hide loading
+        const originalDisplayAnalysis = displayAnalysis;
+        displayAnalysis = function(places) {
+            originalDisplayAnalysis(places);
+            document.getElementById('loadingIndicator').style.display = 'none';
+            document.getElementById('resultsContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

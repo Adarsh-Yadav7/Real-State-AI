@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Price Prediction - Real Estate AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/price.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <i data-lucide="home" class="logo-icon"></i>
+            <span>Real Estate AI</span>
+        </div>
+        <div class="auth-buttons">
+            <button class="login-btn">Log In</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Features</h2>
+            <button class="close-sidebar" aria-label="Close Sidebar">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <ul class="feature-list">
+            <li class="feature-item">
+                <a href="quality.html" class="feature-link">
+                    <i data-lucide="building-2" class="feature-icon"></i>
+                    Building Quality Assessment
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="fraud.html" class="feature-link">
+                    <i data-lucide="shield-alert" class="feature-icon"></i>
+                    Fraud Detection
+                </a>
+            </li>
+            <li class="feature-item active">
+                <a href="price.html" class="feature-link">
+                    <i data-lucide="calculator" class="feature-icon"></i>
+                    Price Prediction
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="location.html" class="feature-link">
+                    <i data-lucide="map-pin" class="feature-icon"></i>
+                    Location Analysis
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="vr.html" class="feature-link">
+                    <i data-lucide="view" class="feature-icon"></i>
+                    VR Real Estate
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="chatbot.html" class="feature-link">
+                    <i data-lucide="message-circle" class="feature-icon"></i>
+                    AI Assistant
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="price-prediction-container">
+            <h1 class="price-page-title">House Price Prediction</h1>
+            <p class="price-page-subtitle">Get accurate property value estimates with our AI-powered prediction model</p>
+            
+            <div class="price-prediction-card">
+                <div class="form-container">
+                    <form id="priceForm">
+                        <div class="form-field">
+                            <label for="location">
+                                <i data-lucide="map-pin"></i> Location
+                            </label>
+                            <select id="location">
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Pune">Pune</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="area">
+                                <i data-lucide="square"></i> Area (sqft)
+                            </label>
+                            <input type="number" id="area" placeholder="Enter area in sqft" min="500" max="10000" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-field half">
+                                <label for="bedrooms">
+                                    <i data-lucide="bed"></i> Bedrooms
+                                </label>
+                                <input type="number" id="bedrooms" placeholder="Number of bedrooms" min="1" max="10" required>
+                            </div>
+
+                            <div class="form-field half">
+                                <label for="bathrooms">
+                                    <i data-lucide="bath"></i> Bathrooms
+                                </label>
+                                <input type="number" id="bathrooms" placeholder="Number of bathrooms" min="1" max="10" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="amenities_score">
+                                <i data-lucide="check-square"></i> Amenities Score
+                            </label>
+                            <select id="amenities_score">
+                                <option value="4">4 - Basic</option>
+                                <option value="4.5">4.5 - Standard</option>
+                                <option value="5" selected>5 - Good</option>
+                                <option value="5.5">5.5 - Premium</option>
+                                <option value="6">6 - Luxury</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field range-field">
+                            <label for="crime_rate">
+                                <i data-lucide="shield-alert"></i> Crime Rate
+                            </label>
+                            <div class="range-container">
+                                <input type="range" id="crime_rate" min="4.34" max="9.91" step="0.1" value="7">
+                                <span id="crime_val">7</span>
+                            </div>
+                            <div class="range-labels">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+
+                        <div class="form-field range-field">
+                            <label for="market_demand">
+                                <i data-lucide="trending-up"></i> Market Demand
+                            </label>
+                            <div class="range-container">
+                                <input type="range" id="market_demand" min="38" max="71" step="1" value="50">
+                                <span id="demand_val">50</span>
+                            </div>
+                            <div class="range-labels">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+
+                        <div class="form-field range-field">
+                            <label for="price_per_sqft">
+                                <i data-lucide="landmark"></i> Price per sqft (₹)
+                            </label>
+                            <div class="range-container">
+                                <input type="range" id="price_per_sqft" min="4592" max="15828" step="100" value="8000">
+                                <span id="price_val">8,000</span>
+                            </div>
+                            <div class="range-labels">
+                                <span>Min</span>
+                                <span>Max</span>
+                            </div>
+                        </div>
+
+                        <button type="button" id="predictBtn" onclick="predictPrice()">
+                            <i data-lucide="search"></i> Predict Price
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="result-container">
+                    <div class="result-card">
+                        <h3>Estimated Property Value</h3>
+                        <div class="predicted-price" id="predicted_price">₹ --</div>
+                        <p class="price-range" id="price_range">Price range: ₹ -- to ₹ --</p>
+                        <div class="confidence-meter">
+                            <div class="confidence-label">AI Confidence</div>
+                            <div class="meter-container">
+                                <div class="meter-fill" id="confidence_meter"></div>
+                            </div>
+                            <div class="confidence-value" id="confidence_value">--</div>
+                        </div>
+                    </div>
+                    
+                    <div class="important-factors">
+                        <h4>Important Price Factors</h4>
+                        <ul id="price_factors">
+                            <li>Location influences property values by up to 40%</li>
+                            <li>Property size and number of rooms</li>
+                            <li>Local amenities and infrastructure</li>
+                            <li>Market demand and economic factors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <p><strong>Disclaimer:</strong> This AI prediction is based on historical data and market trends. Actual property values may vary. We recommend consulting with a professional real estate appraiser for official property valuations.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Real Estate AI</h3>
+                <p>Empowering real estate decisions with artificial intelligence and data analytics.</p>
+                <div class="contact">
+                    <p><i data-lucide="mail"></i> contact@realestateai.com</p>
+                    <p><i data-lucide="phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section subscribe">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest real estate insights.</p>
+                <form>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Real Estate AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="overlay"></div>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Sidebar toggle functionality
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const closeSidebar = document.querySelector('.close-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('sidebar-open');
+            });
+            
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+            
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+
+            // Range sliders value display
+            const crimeRate = document.getElementById('crime_rate');
+            const crimeVal = document.getElementById('crime_val');
+            crimeRate.addEventListener('input', function() {
+                crimeVal.textContent = parseFloat(this.value).toFixed(1);
+            });
+
+            const marketDemand = document.getElementById('market_demand');
+            const demandVal = document.getElementById('demand_val');
+            marketDemand.addEventListener('input', function() {
+                demandVal.textContent = this.value;
+            });
+
+            const pricePerSqft = document.getElementById('price_per_sqft');
+            const priceVal = document.getElementById('price_val');
+            pricePerSqft.addEventListener('input', function() {
+                priceVal.textContent = parseInt(this.value).toLocaleString();
+            });
+        });
+
+        // Prediction functionality
+        function predictPrice() {
+            // Get input values
+            const location = document.getElementById('location').value;
+            const area = parseFloat(document.getElementById('area').value);
+            const bedrooms = parseInt(document.getElementById('bedrooms').value);
+            const bathrooms = parseInt(document.getElementById('bathrooms').value);
+            const amenitiesScore = parseFloat(document.getElementById('amenities_score').value);
+            const crimeRate = parseFloat(document.getElementById('crime_rate').value);
+            const marketDemand = parseInt(document.getElementById('market_demand').value);
+            const pricePerSqft = parseInt(document.getElementById('price_per_sqft').value);
+
+            // Check if all required fields are filled
+            if (!area || !bedrooms || !bathrooms) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Simple formula for demo purposes
+            // In a real app, this would be a more complex ML model or API call
+            let basePrice = area * pricePerSqft;
+            
+            // Location multiplier
+            const locationMultipliers = {
+                'Ahmedabad': 0.8,
+                'Bangalore': 1.3,
+                'Hyderabad': 1.1,
+                'Delhi': 1.4,
+                'Mumbai': 1.6,
+                'Chennai': 1.0,
+                'Kolkata': 0.9,
+                'Pune': 1.0
+            };
+            
+            basePrice *= locationMultipliers[location] || 1;
+            
+            // Other factors
+            basePrice += (bedrooms * 200000);
+            basePrice += (bathrooms * 150000);
+            basePrice *= (amenitiesScore / 5);
+            basePrice *= (1 - (crimeRate - 4.34) / 20);
+            basePrice *= (1 + (marketDemand - 38) / 100);
+            
+            // Add some randomness for demo
+            const randomFactor = 0.9 + (Math.random() * 0.2);
+            basePrice *= randomFactor;
+            
+            // Format and display the price
+            const formattedPrice = Math.round(basePrice).toLocaleString();
+            document.getElementById('predicted_price').innerHTML = `₹ ${formattedPrice}`;
+            
+            // Display price range (±10%)
+            const lowerRange = Math.round(basePrice * 0.9).toLocaleString();
+            const upperRange = Math.round(basePrice * 1.1).toLocaleString();
+            document.getElementById('price_range').innerHTML = `Price range: ₹ ${lowerRange} to ₹ ${upperRange}`;
+            
+            // Set confidence level (for demo purposes)
+            const confidence = 65 + Math.floor(Math.random() * 25);
+            document.getElementById('confidence_meter').style.width = `${confidence}%`;
+            document.getElementById('confidence_value').textContent = `${confidence}%`;
+            
+            // Make the result visible with animation
+            document.querySelector('.result-card').classList.add('show-result');
+        }
+    </script>
+</body>
+</html>

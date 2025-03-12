@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Quality Prediction | Real Estate AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/quality.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <i data-lucide="home" class="logo-icon"></i>
+            <span>Real Estate AI</span>
+        </div>
+        <div class="auth-buttons">
+            <button class="login-btn">Log In</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Features</h2>
+            <button class="close-sidebar" aria-label="Close Sidebar">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <ul class="feature-list">
+            <li class="feature-item active">
+                <a href="quality.html" class="feature-link">
+                    <i data-lucide="building-2" class="feature-icon"></i>
+                    Building Quality Assessment
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="fraud.html" class="feature-link">
+                    <i data-lucide="shield-alert" class="feature-icon"></i>
+                    Fraud Detection
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="price.html" class="feature-link">
+                    <i data-lucide="calculator" class="feature-icon"></i>
+                    Price Prediction
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="location.html" class="feature-link">
+                    <i data-lucide="map-pin" class="feature-icon"></i>
+                    Location Analysis
+                </a>
+            </li>
+            <li class="feature-item">
+                <a href="index.html" class="feature-link">
+                    <i data-lucide="home" class="feature-icon"></i>
+                    Back to Home
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="quality-container">
+            <div class="quality-card">
+                <div class="card-header">
+                    <i data-lucide="building-2" class="quality-icon"></i>
+                    <h1>AI Building Quality Assessment</h1>
+                    <p class="subtitle">Upload or capture an image to analyze building quality and detect potential issues</p>
+                </div>
+                
+                <div class="upload-section">
+                    <div class="upload-option">
+                        <label for="imageUpload" class="upload-label">
+                            <i data-lucide="upload" class="upload-icon"></i>
+                            <span>Upload Image</span>
+                        </label>
+                        <input type="file" id="imageUpload" accept="image/*" class="file-input">
+                    </div>
+                    
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <div class="capture-option">
+                        <button id="captureButton" class="capture-btn">
+                            <i data-lucide="camera" class="camera-icon"></i>
+                            <span>Capture Image</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <video id="video" autoplay></video>
+                    <canvas id="canvas"></canvas>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                
+                <button id="predictButton" class="predict-btn">
+                    <i data-lucide="search" class="predict-icon"></i>
+                    <span>Analyze Building</span>
+                </button>
+                
+                <div id="result" class="result-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Real Estate AI</h3>
+                <p>Empowering real estate decisions with artificial intelligence and data analytics.</p>
+                <div class="contact">
+                    <p><i data-lucide="mail"></i> contact@realestateai.com</p>
+                    <p><i data-lucide="phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="quality.html">Building Quality</a></li>
+                    <li><a href="fraud.html">Fraud Detection</a></li>
+                    <li><a href="price.html">Price Prediction</a></li>
+                    <li><a href="location.html">Location Analysis</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section subscribe">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest real estate insights.</p>
+                <form>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Real Estate AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Sidebar toggle functionality
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const closeSidebar = document.querySelector('.close-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('sidebar-open');
+            });
+            
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+            
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            });
+        });
+    </script>
+
+    <script src="js/quality.js"></script>
+</body>
+</html>
